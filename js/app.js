@@ -1,27 +1,30 @@
-const square = document.querySelector('.square');
+const squares = document.querySelectorAll('.square');
 const mole = document.querySelector('.mole');
 const timeLeft = document.querySelector('#time-left');
-let score = document.querySelector('#score');
+const score = document.querySelector('#score');
 
 let result = 0;
+let hitPosition;
+let currentTime = 60;
+let timerId = null;
 
 function randomSquare() {
-    square.forEach(element => {
-        element.classList.remove('mole');
-    });
+  squares.forEach(square => {
+    square.classList.remove('mole');
+  })
 
-    let randomPosition = square[Math.floor(Math.random()*9)];
-    randomPosition.classList.add('mole');
+  let randomSquare = squares[Math.floor(Math.random() * 9)]
+  randomSquare.classList.add('mole');
 
-    //asign id of the randomPosition to hitPosition for us to use later
-    hitPosition = randomPosition.id;
-
-    square.forEach(element => {
-        element.addEventListener('mouseup', () => {
-            if (element.id === hitPosition) {
-                result += result;
-                score.textContent = result;
-            }
-        });
-    });
+  hitPosition = randomSquare.id;
 }
+
+squares.forEach(square => {
+  square.addEventListener('mousedown', () => {
+    if (square.id == hitPosition) {
+      result++;
+      score.textContent = result;
+      hitPosition = null;
+    }
+  })
+})
