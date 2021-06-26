@@ -46,3 +46,5 @@ function countDown() {
  }
 
 }
+
+let countDownTimerId = setInterval(countDown, 1000);
